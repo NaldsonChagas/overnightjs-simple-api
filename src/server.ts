@@ -2,8 +2,8 @@
 import { Server } from '@overnightjs/core'
 import express, { Application } from 'express'
 import './util/module-alias'
-import { HomeController } from "@src/controllers/HomeController";
 import {BankAccountController} from "@src/controllers/BankAccount/BankAccountController"
+import {PersonController} from "@src/controllers/Person/PersonController"
 
 export class SetupServer extends Server {
 
@@ -18,9 +18,11 @@ export class SetupServer extends Server {
   }
 
   public start(): void {
-    this.app.listen(this.port, () => {
-      console.log(`running on port ${this.port}`)
-    })
+    if (process.env.NODE_ENV !== 'test') {
+      this.app.listen(this.port, () => {
+        console.log(`running on port ${this.port}`)
+      })
+    }
   }
 
   private setupExpress(): void {
@@ -29,7 +31,8 @@ export class SetupServer extends Server {
 
   private setupController() : void {
     this.addControllers([
-      new BankAccountController()
+      new BankAccountController(),
+      new PersonController()
     ])
   }
 
