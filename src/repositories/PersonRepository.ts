@@ -1,3 +1,3 @@
 import {Repository} from "@src/repositories/Repository"
 
-export class BankAccountRepository extends Repository {}
+export class PersonRepository extends Repository {}
