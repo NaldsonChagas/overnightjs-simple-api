@@ -3,6 +3,7 @@ import { Server } from '@overnightjs/core'
 import express, { Application } from 'express'
 import './util/module-alias'
 import { HomeController } from "@src/controllers/HomeController";
+import {BankAccountController} from "@src/controllers/BankAccount/BankAccountController"
 
 export class SetupServer extends Server {
 
@@ -27,8 +28,9 @@ export class SetupServer extends Server {
   }
 
   private setupController() : void {
-    const homeController = new HomeController()
-    this.addControllers([homeController])
+    this.addControllers([
+      new BankAccountController()
+    ])
   }
 
   public getApp(): Application {
