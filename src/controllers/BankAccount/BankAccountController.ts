@@ -14,7 +14,7 @@ export class BankAccountController {
   private bankAccountRepository = new BankAccountRepository()
 
   @Post('/')
-  public create(req: Request, res: Response) {
+  public create(req: Request, res: Response): void {
     const bankAccount = req.body
 
     const {owner, balance, accountNumber} = bankAccount
