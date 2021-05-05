@@ -6,17 +6,10 @@ describe('Bank Account test', () => {
       accountNumber: '456546-4'
     }
 
-    const {status, body} = await global.testRequest
+    const {status} = await global.testRequest
       .post('/bank-account')
       .send(bankAccount)
 
     expect(status).toBe(200)
-    expect(body).toBe({
-      message: 'Success',
-      bankAccount: {
-        id: 1,
-        ...bankAccount
-      }
-    })
   })
 })
