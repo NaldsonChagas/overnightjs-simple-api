@@ -2,8 +2,8 @@
 import { Server } from '@overnightjs/core'
 import express, { Application } from 'express'
 import './util/module-alias'
-import {BankAccountController} from "@src/controllers/BankAccount/BankAccountController"
-import {PersonController} from "@src/controllers/Person/PersonController"
+import {BankAccountController} from "@src/controllers/BankAccountController"
+import {PersonController} from "@src/controllers/PersonController"
 
 export class SetupServer extends Server {
 
