@@ -1,18 +1,25 @@
 
 import { Server } from '@overnightjs/core'
-import express, {Application} from 'express'
-import './util/module-alias.ts'
-import { MyController } from './controllers/MyController'
+import express, { Application } from 'express'
+import './util/module-alias'
+import { HomeController } from "@src/controllers/HomeController";
 
 export class SetupServer extends Server {
 
-  constructor(private port = 3000) {
+  constructor(private readonly port = 3000) {
     super()
   }
 
   public init(): void {
     this.setupExpress()
     this.setupController()
+    this.start()
+  }
+
+  public start(): void {
+    this.app.listen(this.port, () => {
+      console.log(`running on port ${this.port}`)
+    })
   }
 
   private setupExpress(): void {
@@ -20,8 +27,8 @@ export class SetupServer extends Server {
   }
 
   private setupController() : void {
-    const myController = new MyController()
-    this.addControllers([myController])
+    const homeController = new HomeController()
+    this.addControllers([homeController])
   }
 
   public getApp(): Application {

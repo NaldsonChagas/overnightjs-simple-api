@@ -1,7 +1,8 @@
-import { Get } from "@overnightjs/core"
+import {Controller, Get} from "@overnightjs/core"
 import { Request , Response } from "express"
 
-export class MyController {
+@Controller('/')
+export class HomeController {
 
   @Get('/')
   public index(req: Request, res: Response): void {
