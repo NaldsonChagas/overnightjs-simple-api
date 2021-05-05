@@ -22,6 +22,14 @@ export class BankAccount extends Model {
     this.balance -= value
   }
 
+  public transfer(value: number, bankDestiny: BankAccount): void {
+    if (value > this.balance) {
+      throw new Error("Can't transfer value greater than balance")
+    }
+    this.balance -= value
+    bankDestiny.deposit(value)
+  }
+
   public getBalance(): number {
     return this.balance
   }
