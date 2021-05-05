@@ -4,23 +4,24 @@
  */
 import {Request, Response} from "express"
 import {BankAccount} from "@src/models/BankAccount"
-import {Person} from "@src/models/Person"
 import {Controller, Post} from "@overnightjs/core"
 import {BankAccountRepository} from "@src/repositories/BankAccountRepository"
+import {PersonRepository} from "@src/repositories/PersonRepository";
 
 @Controller('bank-account')
 export class BankAccountController {
 
   private bankAccountRepository = new BankAccountRepository()
+  private personRepository = new PersonRepository()
 
   @Post('/')
   public create(req: Request, res: Response): void {
     const bankAccount = req.body
 
-    const {owner, balance, accountNumber} = bankAccount
-    const person = new Person(owner.name, owner.cpf, owner.age)
+    const {balance, accountNumber, ownerId} = bankAccount
 
     try {
+      const person = this.personRepository.findById(ownerId)
       const bankAccountModel = new BankAccount(person, balance, accountNumber)
       this.bankAccountRepository.create(bankAccountModel)
 
