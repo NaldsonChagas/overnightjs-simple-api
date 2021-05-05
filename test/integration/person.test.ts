@@ -11,10 +11,14 @@ describe('Person test', () => {
       .send(person)
 
     expect(status).toBe(200)
-    expect(body).toBe({
+
+
+    const expectedResponse = {
       message: 'Success',
-      id: 1,
-      ...person
-    })
+      person: {
+        ...person
+      }
+    }
+    expect(body).toMatchObject(expectedResponse)
   })
 })
