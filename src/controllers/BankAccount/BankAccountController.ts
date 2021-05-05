@@ -26,7 +26,7 @@ export class BankAccountController {
 
       res.send({
         message: 'Success',
-        bankAccountModel
+        bankAccount: bankAccountModel
       })
     } catch (error) {
       console.log(error)
