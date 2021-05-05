@@ -10,4 +10,19 @@ export class BankAccount extends Model {
     super()
     this.validate([owner, balance, accountNumber])
   }
+
+  public deposit(value: number): void {
+    this.balance += value
+  }
+
+  public withdraw(value: number): void {
+    if (value > this.balance) {
+      throw new Error("Can't withdraw value greater than balance")
+    }
+    this.balance -= value
+  }
+
+  public getBalance(): number {
+    return this.balance
+  }
 }
