@@ -1,4 +1,4 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm"
+import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm"
 import {IsNotEmpty, IsString, Length, Max, Min} from "class-validator"
 
 @Entity()
@@ -34,6 +34,12 @@ export class Person  {
   @Min(12)
   @Max(111)
   private age: number
+
+  @CreateDateColumn({name: 'created_at'})
+  createdAt: Date;
+
+  @UpdateDateColumn({name: 'updated_at'})
+  updatedAt: Date;
 
   constructor(name: string, cpf: string, age: number, id?: number) {
     this.name = name
