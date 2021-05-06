@@ -1,24 +1,18 @@
-import {Repository} from "@src/repositories/Repository"
-import {Person} from "@src/entities/Person";
+import {Person} from "@src/entities/Person"
+import {getManager, getRepository} from "typeorm"
 
-export class PersonRepository extends Repository {
+export class PersonRepository {
 
-  constructor() {
-    super()
+  private entityManager = getManager()
 
-    if (this.items.length < 1) {
-      this.createMainPerson()
-    }
+  public async create(person: Person): Promise<Person> {
+    const createdPerson = await this.entityManager.save(Person, person)
+    return createdPerson
   }
 
-  public createMainPerson(): Person {
-    const mainPerson = new Person('Wellington', '456.456.456-45', 38)
-    return this.create(mainPerson) as Person
-  }
-
-  public findById(id: number): Person {
-    const person = this.items.find(person => person.getId() === id)
-    if (!person) throw new Error("This person doesn't exists")
-    return person as Person
+  public async findById(id: number): Promise<Person> {
+    const person = await this.entityManager.findOne(Person, id)
+    if (!person) throw new Error(`Can't find a person with id ${id}`)
+    return person
   }
 }
