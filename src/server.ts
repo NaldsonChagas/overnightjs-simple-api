@@ -13,9 +13,9 @@ export class SetupServer extends Server {
   }
 
   public async init(): Promise<void> {
+    await this.setupDatabaseConnection()
     this.setupExpress()
     this.setupController()
-    await this.setupDatabaseConnection()
     this.start()
   }
 
