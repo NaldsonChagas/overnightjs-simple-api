@@ -4,7 +4,8 @@ import express, { Application } from 'express'
 import './util/module-alias'
 import {BankAccountController} from "@src/controllers/BankAccountController"
 import {PersonController} from "@src/controllers/PersonController"
-import {createConnection} from "typeorm";
+import {createConnection} from "typeorm"
+import {userUpsert} from "@src/util/database-upsert"
 
 export class SetupServer extends Server {
 
@@ -13,7 +14,7 @@ export class SetupServer extends Server {
   }
 
   public async init(): Promise<void> {
-    await this.setupDatabaseConnection()
+    await this.setupDatabase()
     this.setupExpress()
     this.setupController()
     this.start()
@@ -38,8 +39,9 @@ export class SetupServer extends Server {
     ])
   }
 
-  public async setupDatabaseConnection(): Promise<void> {
-    await createConnection()
+  public async setupDatabase(): Promise<void> {
+    const connection = await createConnection()
+    await userUpsert(connection)
   }
 
   public getApp(): Application {
