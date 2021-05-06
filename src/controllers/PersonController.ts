@@ -1,6 +1,6 @@
 import {Controller, Post} from "@overnightjs/core"
 import {Request, Response} from "express"
-import {Person} from "@src/models/Person"
+import {Person} from "@src/entities/Person"
 import {PersonRepository} from "@src/repositories/PersonRepository";
 
 @Controller('person')

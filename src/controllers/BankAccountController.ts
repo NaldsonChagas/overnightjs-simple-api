@@ -3,7 +3,7 @@
   be in integration folder. But only for study
  */
 import {Request, Response} from "express"
-import {BankAccount} from "@src/models/BankAccount"
+import {BankAccount} from "@src/entities/BankAccount"
 import {Controller, Post} from "@overnightjs/core"
 import {BankAccountRepository} from "@src/repositories/BankAccountRepository"
 import {PersonRepository} from "@src/repositories/PersonRepository";

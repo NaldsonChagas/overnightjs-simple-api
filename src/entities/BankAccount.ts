@@ -1,5 +1,5 @@
-import {Person} from "@src/models/Person"
-import {Model} from "@src/models/utils/Model"
+import {Person} from "@src/entities/Person"
+import {Model} from "@src/entities/utils/Model"
 
 export class BankAccount extends Model {
   constructor(

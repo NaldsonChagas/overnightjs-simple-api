@@ -1,5 +1,5 @@
 import {Repository} from "@src/repositories/Repository"
-import {Person} from "@src/models/Person";
+import {Person} from "@src/entities/Person";
 
 export class PersonRepository extends Repository {
 

@@ -1,4 +1,4 @@
-import {Model} from "@src/models/utils/Model"
+import {Model} from "@src/entities/utils/Model"
 
 export class Repository {
   protected readonly items: Array<Model> = []

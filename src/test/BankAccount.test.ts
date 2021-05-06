@@ -1,5 +1,5 @@
-import {BankAccount} from "@src/models/BankAccount";
-import {Person} from "@src/models/Person";
+import {BankAccount} from "@src/entities/BankAccount";
+import {Person} from "@src/entities/Person";
 
 describe('Test Bank Account functionalities', () => {
 
