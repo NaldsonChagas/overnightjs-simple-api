@@ -32,6 +32,13 @@ export class BankAccount {
   @UpdateDateColumn({name: 'updated_at'})
   private updatedAt: Date
 
+  constructor(owner: Person, balance: number, accountNumber: string, id?: number) {
+    this.owner = owner
+    this.balance = balance
+    this.accountNumber = accountNumber
+    this.id = id || this.id
+  }
+
   public deposit(value: number): void {
     this.balance += value
   }

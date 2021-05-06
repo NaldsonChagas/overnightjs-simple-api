@@ -15,15 +15,14 @@ export class BankAccountController {
   private personRepository = new PersonRepository()
 
   @Post('/')
-  public create(req: Request, res: Response): void {
+  public async create(req: Request, res: Response): Promise<void> {
     const bankAccount = req.body
-
     const {balance, accountNumber, ownerId} = bankAccount
 
     try {
-      const person = this.personRepository.findById(ownerId)
+      const person = await this.personRepository.findById(ownerId)
       const bankAccountModel = new BankAccount(person, balance, accountNumber)
-      this.bankAccountRepository.create(bankAccountModel)
+      await this.bankAccountRepository.create(bankAccountModel)
 
       res.send({
         message: 'Success',
