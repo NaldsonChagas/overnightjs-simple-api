@@ -1,15 +1,36 @@
 import {Person} from "@src/entities/Person"
-import {Model} from "@src/entities/utils/Model"
+import {Column, CreateDateColumn, Entity, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn, JoinColumn} from "typeorm"
+import {IsNotEmpty, IsString} from "class-validator"
 
-export class BankAccount extends Model {
-  constructor(
-    private owner: Person,
-    private balance: number,
-    private accountNumber: string,
-  ) {
-    super()
-    this.validate([owner, balance, accountNumber])
-  }
+@Entity()
+export class BankAccount {
+
+  @PrimaryGeneratedColumn()
+  private readonly id: number
+
+  @OneToOne(() => Person, {nullable: false})
+  @JoinColumn()
+  private owner: Person
+
+  @Column({
+    type: 'float',
+    nullable: false
+  })
+  private balance: number
+
+  @Column({
+    type: 'varchar',
+    nullable: false
+  })
+  @IsNotEmpty()
+  @IsString()
+  private accountNumber: string
+
+  @CreateDateColumn({name: 'created_at'})
+  private createdAt: Date
+
+  @UpdateDateColumn({name: 'updated_at'})
+  private updatedAt: Date
 
   public deposit(value: number): void {
     this.balance += value

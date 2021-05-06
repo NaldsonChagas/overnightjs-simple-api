@@ -27,7 +27,7 @@ export class Person  {
   private cpf: string
 
   @Column({
-    type: 'varchar',
+    type: 'int',
     nullable: false
   })
   @IsNotEmpty()
@@ -36,10 +36,10 @@ export class Person  {
   private age: number
 
   @CreateDateColumn({name: 'created_at'})
-  createdAt: Date;
+  private createdAt: Date
 
   @UpdateDateColumn({name: 'updated_at'})
-  updatedAt: Date;
+  private updatedAt: Date
 
   constructor(name: string, cpf: string, age: number, id?: number) {
     this.name = name
