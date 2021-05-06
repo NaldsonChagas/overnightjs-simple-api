@@ -40,8 +40,8 @@ export class SetupServer extends Server {
   }
 
   public async setupDatabase(): Promise<void> {
-    const connection = await createConnection()
-    await userUpsert(connection)
+    await createConnection()
+    await userUpsert()
   }
 
   public getApp(): Application {

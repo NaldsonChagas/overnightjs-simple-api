@@ -1,12 +1,12 @@
-import {Connection} from "typeorm"
+import {getConnection} from "typeorm"
 import {Person} from "@src/entities/Person"
 
-export async function userUpsert(connection: Connection): Promise<void> {
-  await connection
+export async function userUpsert(): Promise<void> {
+  await getConnection()
     .createQueryBuilder()
     .insert()
     .into(Person)
-    .values(new Person('Wellington', '456.456.456-78', 38))
+    .values({name: 'Wellington', cpf: '456.456.456-78', age: 38})
     .onConflict('("cpf") DO NOTHING')
     .execute()
 }
