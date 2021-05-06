@@ -4,6 +4,7 @@ import express, { Application } from 'express'
 import './util/module-alias'
 import {BankAccountController} from "@src/controllers/BankAccountController"
 import {PersonController} from "@src/controllers/PersonController"
+import {createConnection} from "typeorm";
 
 export class SetupServer extends Server {
 
@@ -11,9 +12,10 @@ export class SetupServer extends Server {
     super()
   }
 
-  public init(): void {
+  public async init(): Promise<void> {
     this.setupExpress()
     this.setupController()
+    await this.setupDatabaseConnection()
     this.start()
   }
 
@@ -34,6 +36,10 @@ export class SetupServer extends Server {
       new BankAccountController(),
       new PersonController()
     ])
+  }
+
+  public async setupDatabaseConnection(): Promise<void> {
+    await createConnection()
   }
 
   public getApp(): Application {

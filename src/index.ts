@@ -1,4 +1,7 @@
-import { SetupServer } from "./server"
+import {SetupServer} from "./server"
 
-const server = new SetupServer()
-server.init()
+const server = new SetupServer();
+
+(async () => {
+  await server.init()
+})()
