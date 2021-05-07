@@ -5,7 +5,7 @@ import './util/module-alias'
 import {BankAccountController} from "@src/controllers/BankAccountController"
 import {PersonController} from "@src/controllers/PersonController"
 import {createConnection} from "typeorm"
-import {userUpsert} from "@src/util/database-upsert"
+import {mainPersonUpsert} from "@src/util/database-upsert"
 
 export class SetupServer extends Server {
 
@@ -41,7 +41,7 @@ export class SetupServer extends Server {
 
   public async setupDatabase(): Promise<void> {
     await createConnection()
-    await userUpsert()
+    await mainPersonUpsert()
   }
 
   public getApp(): Application {
