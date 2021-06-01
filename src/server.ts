@@ -1,14 +1,12 @@
-
 import { Server } from '@overnightjs/core'
 import express, { Application } from 'express'
 import './util/module-alias'
-import {BankAccountController} from "@src/controllers/BankAccountController"
-import {PersonController} from "@src/controllers/PersonController"
-import {createConnection} from "typeorm"
-import {mainPersonUpsert} from "@src/util/database-upsert"
+import { BankAccountController } from '@src/controllers/BankAccountController'
+import { PersonController } from '@src/controllers/PersonController'
+import { createConnection } from 'typeorm'
+import { mainPersonUpsert } from '@src/util/database-upsert'
 
 export class SetupServer extends Server {
-
   constructor(private readonly port = 3000) {
     super()
   }
@@ -32,11 +30,8 @@ export class SetupServer extends Server {
     this.app.use(express.json())
   }
 
-  private setupController() : void {
-    this.addControllers([
-      new BankAccountController(),
-      new PersonController()
-    ])
+  private setupController(): void {
+    this.addControllers([new BankAccountController(), new PersonController()])
   }
 
   public async setupDatabase(): Promise<void> {

@@ -1,9 +1,14 @@
-import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm"
-import {IsNotEmpty, IsString, Length, Max, Min} from "class-validator"
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm'
+import { IsNotEmpty, IsString, Length, Max, Min } from 'class-validator'
 
 @Entity()
-export class Person  {
-
+export class Person {
   @PrimaryGeneratedColumn()
   private readonly id: number
 
@@ -20,7 +25,7 @@ export class Person  {
     type: 'varchar',
     length: 14,
     unique: true,
-    nullable: false
+    nullable: false,
   })
   @IsString()
   @IsNotEmpty()
@@ -28,17 +33,17 @@ export class Person  {
 
   @Column({
     type: 'int',
-    nullable: false
+    nullable: false,
   })
   @IsNotEmpty()
   @Min(12)
   @Max(111)
   private age: number
 
-  @CreateDateColumn({name: 'created_at'})
+  @CreateDateColumn({ name: 'created_at' })
   private createdAt: Date
 
-  @UpdateDateColumn({name: 'updated_at'})
+  @UpdateDateColumn({ name: 'updated_at' })
   private updatedAt: Date
 
   constructor(name: string, cpf: string, age: number, id?: number) {

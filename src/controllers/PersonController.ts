@@ -1,16 +1,15 @@
-import {Controller, Post} from "@overnightjs/core"
-import {Request, Response} from "express"
-import {Person} from "@src/entities/Person"
-import {PersonRepository} from "@src/repositories/PersonRepository"
+import { Controller, Post } from '@overnightjs/core'
+import { Request, Response } from 'express'
+import { Person } from '@src/entities/Person'
+import { PersonRepository } from '@src/repositories/PersonRepository'
 
 @Controller('person')
 export class PersonController {
-
   private personRepository = new PersonRepository()
 
   @Post('/')
-  public async create(req: Request, res: Response) {
-    const {name, age, cpf} = req.body
+  public async create(req: Request, res: Response): Promise<void> {
+    const { name, age, cpf } = req.body
 
     try {
       const person = new Person(name, cpf, age)
@@ -18,7 +17,7 @@ export class PersonController {
 
       res.send({
         message: 'Success',
-        person: createdPerson
+        person: createdPerson,
       })
     } catch (error) {
       console.log(error)
